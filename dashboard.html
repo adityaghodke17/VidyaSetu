@@ -15,8 +15,9 @@
   </div>
 
   <div id="id-card">
+    <div class="ribbon">Premium</div>
     <div id="profile-photo-container">
-      <img id="profile-photo" src="default-avatar.png" alt="Profile Photo">
+      <img id="profile-photo" src="default-avatar.png" alt="Profile Photo" title="Click to upload your photo">
       <input type="file" id="photo-upload" accept="image/*">
     </div>
     <h3 id="card-name"></h3>
@@ -26,17 +27,12 @@
   </div>
 
   <div id="subject-section">
-    <h3>Select Subjects</h3>
-    <select id="subject-select">
-      <option value="Mathematics">Mathematics</option>
-      <option value="Physics">Physics</option>
-      <option value="Chemistry">Chemistry</option>
-      <option value="Biology">Biology</option>
-      <option value="Computer Science">Computer Science</option>
-      <option value="English">English</option>
-    </select>
+    <h3>Add Subject</h3>
+    <input type="text" id="subject-name" placeholder="Subject Name">
+    <input type="date" id="subject-start">
+    <input type="date" id="subject-due">
+    <input type="text" id="subject-teacher" placeholder="Teacher Name">
     <button id="add-subject-btn">Add Subject</button>
-
     <ul id="subjects-list"></ul>
   </div>
 </div>
