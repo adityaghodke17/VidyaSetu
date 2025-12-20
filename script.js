@@ -1,84 +1,63 @@
+// Loader
+window.onload = () => {
+  const loader = document.getElementById("loader");
+  if (loader) setTimeout(() => loader.remove(), 800);
+};
+
+// Photo upload
+function triggerPhoto() {
+  document.getElementById("photo-input").click();
+}
+
+document.getElementById("photo-input")?.addEventListener("change", e => {
+  const reader = new FileReader();
+  reader.onload = () => {
+    document.getElementById("photo-preview").src = reader.result;
+    localStorage.setItem("photo", reader.result);
+  };
+  reader.readAsDataURL(e.target.files[0]);
+});
+
+// Login
 function login() {
-  const name = document.getElementById('name').value.trim();
-  const enrollment = document.getElementById('enrollment').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const photo = localStorage.getItem('profilePhoto');
+  const name = name.value.trim();
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
 
-  if (!name || !enrollment || !email || !phone) {
-    alert('All fields are compulsory!');
-    return;
-  }
-  if (!email.endsWith('@gmail.com')) {
-    alert('Email must end with @gmail.com');
-    return;
-  }
-  const phoneRegex = /^[6-9]\d{9}$/;
-  if (!phoneRegex.test(phone)) {
-    alert('Phone must be a valid 10-digit Indian number starting with 6-9');
-    return;
-  }
-  if (!photo) {
-    alert('Please upload your profile photo!');
-    return;
-  }
+  if (!email.endsWith("@gmail.com")) return alert("Use Gmail only");
+  if (!/^[6-9]\d{9}$/.test(phone)) return alert("Invalid Indian number");
+  if (!localStorage.getItem("photo")) return alert("Upload photo");
 
-  localStorage.setItem('studentName', name);
-  localStorage.setItem('studentEnrollment', enrollment);
-  localStorage.setItem('studentEmail', email);
-  localStorage.setItem('studentPhone', phone);
+  localStorage.setItem("name", name);
+  localStorage.setItem("email", email);
+  localStorage.setItem("phone", phone);
+  localStorage.setItem("loggedIn", "true");
 
-  window.location.href = "dashboard.html";
+  location.href = "dashboard.html";
 }
 
-function loadDashboard() {
-  if (!localStorage.getItem('studentName')) {
-    window.location.href = "index.html";
-    return;
-  }
+// Dashboard load
+if (location.pathname.includes("dashboard")) {
+  if (!localStorage.getItem("loggedIn")) location.href = "index.html";
 
-  document.getElementById('student-name').innerText = `Welcome, ${localStorage.getItem('studentName')}`;
-  document.getElementById('card-name').innerText = localStorage.getItem('studentName');
-  document.getElementById('card-enrollment').innerText = localStorage.getItem('studentEnrollment');
-  document.getElementById('card-email').innerText = localStorage.getItem('studentEmail');
-  document.getElementById('card-phone').innerText = localStorage.getItem('studentPhone');
+  document.getElementById("welcomeText").innerText =
+    "Welcome, " + localStorage.getItem("name");
 
-  const photo = localStorage.getItem('profilePhoto');
-  if(photo){
-    document.getElementById('profile-photo').src = photo;
-  } else {
-    alert('Please upload your profile photo!');
-  }
+  card-name.innerText = localStorage.getItem("name");
+  card-email.innerText = localStorage.getItem("email");
+  card-phone.innerText = localStorage.getItem("phone");
+  card-photo.src = localStorage.getItem("photo");
 }
 
-// Add Subject
+// Subjects
 function addSubject() {
-  const name = document.getElementById('subject-name').value.trim();
-  const start = document.getElementById('subject-start').value;
-  const due = document.getElementById('subject-due').value;
-  const teacher = document.getElementById('subject-teacher').value.trim();
-
-  if(!name || !start || !due || !teacher){
-    alert('Please fill all subject fields!');
-    return;
-  }
-
-  const li = document.createElement('li');
-  li.innerHTML = `<strong>${name}</strong><br>Start: ${start} | Due: ${due} | Teacher: ${teacher} <button onclick="deleteSubject(this)">Delete</button>`;
-  document.getElementById('subjects-list').appendChild(li);
-
-  document.getElementById('subject-name').value = '';
-  document.getElementById('subject-start').value = '';
-  document.getElementById('subject-due').value = '';
-  document.getElementById('subject-teacher').value = '';
-}
-
-function deleteSubject(button) {
-  button.parentElement.remove();
+  const li = document.createElement("li");
+  li.textContent = `${sub-name.value} | ${sub-teacher.value}`;
+  subjectList.appendChild(li);
 }
 
 // Logout
 function logout() {
   localStorage.clear();
-  window.location.href = "index.html";
+  location.href = "index.html";
 }
