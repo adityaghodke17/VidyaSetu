@@ -1,87 +1,75 @@
-let tasks = [];
-
 function login() {
-    let name = studentName.value;
-    let enroll = studentEnroll.value;
-    let email = studentEmail.value;
-    let phone = studentPhone.value;
+  const name = document.getElementById('name').value;
+  const enrollment = document.getElementById('enrollment').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
 
-    if (!name || !enroll || !email || !phone) {
-        alert("Please fill all details");
-        return;
-    }
+  if(name && enrollment && email && phone) {
+    localStorage.setItem('studentName', name);
+    localStorage.setItem('studentEnrollment', enrollment);
+    localStorage.setItem('studentEmail', email);
+    localStorage.setItem('studentPhone', phone);
 
-    localStorage.setItem("student", name);
-    localStorage.setItem("enroll", enroll);
-    localStorage.setItem("email", email);
-    localStorage.setItem("phone", phone);
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
 
-    loginBox.classList.add("hidden");
-    appBox.classList.remove("hidden");
-
-    loadProfile();
+    loadDashboard();
+  } else {
+    alert('Please fill all fields!');
+  }
 }
 
-function loadProfile() {
-    profileName.innerText = "Welcome, " + localStorage.getItem("student");
+function loadDashboard() {
+  document.getElementById('student-name').innerText = `Welcome, ${localStorage.getItem('studentName')}`;
+  document.getElementById('card-name').innerText = localStorage.getItem('studentName');
+  document.getElementById('card-enrollment').innerText = localStorage.getItem('studentEnrollment');
+  document.getElementById('card-email').innerText = localStorage.getItem('studentEmail');
+  document.getElementById('card-phone').innerText = localStorage.getItem('studentPhone');
 
-    idName.innerText = localStorage.getItem("student");
-    idEnroll.innerText = localStorage.getItem("enroll");
-    idEmail.innerText = localStorage.getItem("email");
-    idPhone.innerText = localStorage.getItem("phone");
-
-    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    renderTasks();
+  // Load profile photo if uploaded before
+  if(localStorage.getItem('profilePhoto')) {
+    document.getElementById('profile-photo').src = localStorage.getItem('profilePhoto');
+  }
 }
 
+// Add subject with delete button
+function addSubject() {
+  const select = document.getElementById('subject-select');
+  const subject = select.value;
+  if(subject) {
+    const li = document.createElement('li');
+    li.innerHTML = `${subject} <button onclick="deleteSubject(this)">Delete</button>`;
+    document.getElementById('subjects-list').appendChild(li);
+  }
+}
+
+function deleteSubject(button) {
+  button.parentElement.remove();
+}
+
+// Upload profile photo
+function uploadPhoto(event) {
+  const reader = new FileReader();
+  reader.onload = function(){
+    const dataURL = reader.result;
+    document.getElementById('profile-photo').src = dataURL;
+    localStorage.setItem('profilePhoto', dataURL);
+  };
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+// Logout function
 function logout() {
-    localStorage.clear();
-    location.reload();
+  localStorage.clear();
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('login-section').style.display = 'flex';
 }
 
-function addTask() {
-    if (taskInput.value === "") return;
-
-    tasks.push({
-        text: taskInput.value,
-        done: false
-    });
-
-    taskInput.value = "";
-    saveTasks();
-}
-
-function renderTasks() {
-    taskList.innerHTML = "";
-    let doneCount = 0;
-
-    tasks.forEach((task, index) => {
-        let li = document.createElement("li");
-        li.innerText = task.text;
-        if (task.done) {
-            li.classList.add("done");
-            doneCount++;
-        }
-
-        li.onclick = () => {
-            task.done = !task.done;
-            saveTasks();
-        };
-
-        taskList.appendChild(li);
-    });
-
-    totalTasks.innerText = tasks.length;
-    doneTasks.innerText = doneCount;
-}
-
-function saveTasks() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    renderTasks();
-}
-
-if (localStorage.getItem("student")) {
-    loginBox.classList.add("hidden");
-    appBox.classList.remove("hidden");
-    loadProfile();
+// Auto-load dashboard if already logged in
+window.onload = function() {
+  if(localStorage.getItem('studentName')) {
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadDashboard();
+  }
 }
