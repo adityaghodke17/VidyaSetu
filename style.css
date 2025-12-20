@@ -1,64 +1,154 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f0f7ff;
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
-.container {
+/* LOGIN */
+.login-container {
     background: white;
     padding: 25px;
-    width: 350px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 320px;
+    border-radius: 16px;
     text-align: center;
+    animation: pop 0.6s ease;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+@keyframes pop {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* APP */
+.container {
+    background: white;
+    width: 380px;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    animation: pop 0.6s ease;
+}
+
+.hidden {
+    display: none;
 }
 
 h1 {
+    text-align: center;
     color: #1e40af;
 }
 
 .tagline {
+    text-align: center;
     font-size: 14px;
     color: #555;
-    margin-bottom: 15px;
 }
 
-.task-box input, .task-box button {
-    width: 100%;
-    padding: 8px;
+.profile {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.logout {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ID CARD */
+.id-card {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #facc15, #ca8a04);
+    color: #1f2937;
+    box-shadow: 0 0 20px #fde047;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 10px #facc15; }
+    to { box-shadow: 0 0 25px #fde047; }
+}
+
+.id-header, .id-footer {
+    text-align: center;
+    font-weight: bold;
+}
+
+.id-body p {
+    font-size: 13px;
     margin: 5px 0;
 }
 
-button {
-    background: #1e40af;
+/* TASKS */
+.task-box input, .task-box button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 8px;
+}
+
+.task-box button {
+    background: #2563eb;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background: #2563eb;
 }
 
 ul {
     list-style: none;
     padding: 0;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 li {
-    background: #e0e7ff;
+    background: #eef2ff;
     padding: 8px;
-    margin: 5px 0;
-    border-radius: 5px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
     cursor: pointer;
 }
 
 li.done {
     text-decoration: line-through;
     background: #bbf7d0;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
 }
