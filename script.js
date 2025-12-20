@@ -1,18 +1,18 @@
 // Loader
 window.onload = () => {
   const loader = document.getElementById("loader");
-  if (loader) setTimeout(() => loader.remove(), 800);
+  if (loader) loader.style.display = "none";
 };
 
 // Photo upload
-function triggerPhoto() {
-  document.getElementById("photo-input").click();
+function uploadPhoto() {
+  document.getElementById("photoInput").click();
 }
 
-document.getElementById("photo-input")?.addEventListener("change", e => {
+document.getElementById("photoInput")?.addEventListener("change", e => {
   const reader = new FileReader();
   reader.onload = () => {
-    document.getElementById("photo-preview").src = reader.result;
+    document.getElementById("photoPreview").src = reader.result;
     localStorage.setItem("photo", reader.result);
   };
   reader.readAsDataURL(e.target.files[0]);
@@ -20,15 +20,17 @@ document.getElementById("photo-input")?.addEventListener("change", e => {
 
 // Login
 function login() {
-  const name = name.value.trim();
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
+  const name = document.getElementById("name").value.trim();
+  const enroll = document.getElementById("enroll").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
 
   if (!email.endsWith("@gmail.com")) return alert("Use Gmail only");
-  if (!/^[6-9]\d{9}$/.test(phone)) return alert("Invalid Indian number");
+  if (!/^[6-9]\d{9}$/.test(phone)) return alert("Invalid phone");
   if (!localStorage.getItem("photo")) return alert("Upload photo");
 
   localStorage.setItem("name", name);
+  localStorage.setItem("enroll", enroll);
   localStorage.setItem("email", email);
   localStorage.setItem("phone", phone);
   localStorage.setItem("loggedIn", "true");
@@ -43,17 +45,21 @@ if (location.pathname.includes("dashboard")) {
   document.getElementById("welcomeText").innerText =
     "Welcome, " + localStorage.getItem("name");
 
-  card-name.innerText = localStorage.getItem("name");
-  card-email.innerText = localStorage.getItem("email");
-  card-phone.innerText = localStorage.getItem("phone");
-  card-photo.src = localStorage.getItem("photo");
+  document.getElementById("cardName").innerText = localStorage.getItem("name");
+  document.getElementById("cardEnroll").innerText = localStorage.getItem("enroll");
+  document.getElementById("cardEmail").innerText = localStorage.getItem("email");
+  document.getElementById("cardPhone").innerText = localStorage.getItem("phone");
+  document.getElementById("cardPhoto").src = localStorage.getItem("photo");
 }
 
 // Subjects
 function addSubject() {
+  const name = document.getElementById("subName").value;
+  const teacher = document.getElementById("subTeacher").value;
+
   const li = document.createElement("li");
-  li.textContent = `${sub-name.value} | ${sub-teacher.value}`;
-  subjectList.appendChild(li);
+  li.textContent = `${name} (${teacher})`;
+  document.getElementById("subjectList").appendChild(li);
 }
 
 // Logout
