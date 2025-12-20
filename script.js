@@ -1,74 +1,60 @@
 // Photo preview
-document.getElementById("photoInput")?.addEventListener("change", e => {
-  const reader = new FileReader();
-  reader.onload = () => {
-    document.getElementById("photoPreview").src = reader.result;
-    localStorage.setItem("photo", reader.result);
-  };
-  reader.readAsDataURL(e.target.files[0]);
-});
+const photoInput = document.getElementById("photoInput");
+if (photoInput) {
+  photoInput.addEventListener("change", e => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = document.getElementById("photoPreview");
+      img.src = reader.result;
+      img.style.display = "block";
+      localStorage.setItem("photo", reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
+}
 
 // Login
 function login() {
-  const name = document.getElementById("name").value.trim();
-  const enroll = document.getElementById("enroll").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
 
-  if (!email.endsWith("@gmail.com")) {
-    alert("Email must be Gmail");
-    return;
-  }
+  if (!email.endsWith("@gmail.com")) return alert("Use Gmail only");
+  if (!/^[6-9]\d{9}$/.test(phone)) return alert("Invalid phone");
 
-  if (!/^[6-9]\d{9}$/.test(phone)) {
-    alert("Enter valid Indian phone number");
-    return;
-  }
+  ["name","enroll","email","phone"].forEach(id =>
+    localStorage.setItem(id, document.getElementById(id).value)
+  );
 
-  if (!localStorage.getItem("photo")) {
-    alert("Please upload photo");
-    return;
-  }
+  if (!localStorage.getItem("photo")) return alert("Upload photo");
 
-  localStorage.setItem("name", name);
-  localStorage.setItem("enroll", enroll);
-  localStorage.setItem("email", email);
-  localStorage.setItem("phone", phone);
   localStorage.setItem("loggedIn", "true");
-
-  window.location.href = "dashboard.html";
+  location.href = "dashboard.html";
 }
 
 // Dashboard load
 if (location.pathname.includes("dashboard")) {
-  if (!localStorage.getItem("loggedIn")) {
-    window.location.href = "index.html";
-  }
+  if (!localStorage.getItem("loggedIn")) location.href = "index.html";
 
   document.getElementById("welcome").innerText =
     "Welcome, " + localStorage.getItem("name");
 
-  document.getElementById("cardName").innerText = localStorage.getItem("name");
-  document.getElementById("cardEnroll").innerText = localStorage.getItem("enroll");
-  document.getElementById("cardEmail").innerText = localStorage.getItem("email");
-  document.getElementById("cardPhone").innerText = localStorage.getItem("phone");
+  ["Name","Enroll","Email","Phone"].forEach(k =>
+    document.getElementById("card"+k).innerText =
+      localStorage.getItem(k.toLowerCase())
+  );
+
   document.getElementById("cardPhoto").src = localStorage.getItem("photo");
 }
 
 // Subjects
 function addSubject() {
-  const name = document.getElementById("subName").value;
-  const teacher = document.getElementById("subTeacher").value;
-
-  if (!name) return;
-
   const li = document.createElement("li");
-  li.textContent = `${name} - ${teacher}`;
+  li.textContent = document.getElementById("subName").value;
   document.getElementById("subjectList").appendChild(li);
 }
 
 // Logout
 function logout() {
   localStorage.clear();
-  window.location.href = "index.html";
+  location.href = "index.html";
 }
