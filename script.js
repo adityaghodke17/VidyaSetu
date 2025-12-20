@@ -1,14 +1,4 @@
-// Loader
-window.onload = () => {
-  const loader = document.getElementById("loader");
-  if (loader) loader.style.display = "none";
-};
-
-// Photo upload
-function uploadPhoto() {
-  document.getElementById("photoInput").click();
-}
-
+// Photo preview
 document.getElementById("photoInput")?.addEventListener("change", e => {
   const reader = new FileReader();
   reader.onload = () => {
@@ -25,9 +15,20 @@ function login() {
   const email = document.getElementById("email").value.trim();
   const phone = document.getElementById("phone").value.trim();
 
-  if (!email.endsWith("@gmail.com")) return alert("Use Gmail only");
-  if (!/^[6-9]\d{9}$/.test(phone)) return alert("Invalid phone");
-  if (!localStorage.getItem("photo")) return alert("Upload photo");
+  if (!email.endsWith("@gmail.com")) {
+    alert("Email must be Gmail");
+    return;
+  }
+
+  if (!/^[6-9]\d{9}$/.test(phone)) {
+    alert("Enter valid Indian phone number");
+    return;
+  }
+
+  if (!localStorage.getItem("photo")) {
+    alert("Please upload photo");
+    return;
+  }
 
   localStorage.setItem("name", name);
   localStorage.setItem("enroll", enroll);
@@ -35,14 +36,16 @@ function login() {
   localStorage.setItem("phone", phone);
   localStorage.setItem("loggedIn", "true");
 
-  location.href = "dashboard.html";
+  window.location.href = "dashboard.html";
 }
 
 // Dashboard load
 if (location.pathname.includes("dashboard")) {
-  if (!localStorage.getItem("loggedIn")) location.href = "index.html";
+  if (!localStorage.getItem("loggedIn")) {
+    window.location.href = "index.html";
+  }
 
-  document.getElementById("welcomeText").innerText =
+  document.getElementById("welcome").innerText =
     "Welcome, " + localStorage.getItem("name");
 
   document.getElementById("cardName").innerText = localStorage.getItem("name");
@@ -57,13 +60,15 @@ function addSubject() {
   const name = document.getElementById("subName").value;
   const teacher = document.getElementById("subTeacher").value;
 
+  if (!name) return;
+
   const li = document.createElement("li");
-  li.textContent = `${name} (${teacher})`;
+  li.textContent = `${name} - ${teacher}`;
   document.getElementById("subjectList").appendChild(li);
 }
 
 // Logout
 function logout() {
   localStorage.clear();
-  location.href = "index.html";
+  window.location.href = "index.html";
 }
