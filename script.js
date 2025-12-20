@@ -4,32 +4,27 @@ function login() {
   const email = document.getElementById('email').value.trim();
   const phone = document.getElementById('phone').value.trim();
 
-  // Check all fields
   if (!name || !enrollment || !email || !phone) {
     alert('All fields are compulsory!');
     return;
   }
 
-  // Email validation (@gmail.com)
   if (!email.endsWith('@gmail.com')) {
     alert('Email must end with @gmail.com');
     return;
   }
 
-  // Phone validation (10-digit Indian number)
   const phoneRegex = /^[6-9]\d{9}$/;
   if (!phoneRegex.test(phone)) {
     alert('Phone must be a valid 10-digit Indian number starting with 6-9');
     return;
   }
 
-  // Save to localStorage
   localStorage.setItem('studentName', name);
   localStorage.setItem('studentEnrollment', enrollment);
   localStorage.setItem('studentEmail', email);
   localStorage.setItem('studentPhone', phone);
 
-  // Redirect to dashboard
   window.location.href = "dashboard.html";
 }
 
@@ -45,33 +40,51 @@ function loadDashboard() {
   document.getElementById('card-email').innerText = localStorage.getItem('studentEmail');
   document.getElementById('card-phone').innerText = localStorage.getItem('studentPhone');
 
-  if (localStorage.getItem('profilePhoto')) {
-    document.getElementById('profile-photo').src = localStorage.getItem('profilePhoto');
+  const photo = localStorage.getItem('profilePhoto');
+  if(photo){
+    document.getElementById('profile-photo').src = photo;
+  } else {
+    alert('Please upload your profile photo!');
   }
-}
-
-function addSubject() {
-  const select = document.getElementById('subject-select');
-  const subject = select.value;
-  if (subject) {
-    const li = document.createElement('li');
-    li.innerHTML = `${subject} <button onclick="deleteSubject(this)">Delete</button>`;
-    document.getElementById('subjects-list').appendChild(li);
-  }
-}
-
-function deleteSubject(button) {
-  button.parentElement.remove();
 }
 
 function uploadPhoto(event) {
   const reader = new FileReader();
-  reader.onload = function() {
+  reader.onload = function(){
     const dataURL = reader.result;
     document.getElementById('profile-photo').src = dataURL;
     localStorage.setItem('profilePhoto', dataURL);
   };
   reader.readAsDataURL(event.target.files[0]);
+}
+
+function addSubject() {
+  const name = document.getElementById('subject-name').value.trim();
+  const start = document.getElementById('subject-start').value;
+  const due = document.getElementById('subject-due').value;
+  const teacher = document.getElementById('subject-teacher').value.trim();
+
+  if(!name || !start || !due || !teacher){
+    alert('Please fill all subject fields!');
+    return;
+  }
+
+  const li = document.createElement('li');
+  li.innerHTML = `
+    <strong>${name}</strong><br>
+    Start: ${start} | Due: ${due} | Teacher: ${teacher}
+    <button onclick="deleteSubject(this)">Delete</button>
+  `;
+  document.getElementById('subjects-list').appendChild(li);
+
+  document.getElementById('subject-name').value = '';
+  document.getElementById('subject-start').value = '';
+  document.getElementById('subject-due').value = '';
+  document.getElementById('subject-teacher').value = '';
+}
+
+function deleteSubject(button) {
+  button.parentElement.remove();
 }
 
 function logout() {
