@@ -1,25 +1,39 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #eef2f3;
+  background: #f2f2f2;
 }
 
-/* Loader */
-#loader {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  color: white;
+/* HERO */
+.hero {
+  height: 100vh;
+  background: black;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  z-index: 999;
+  align-items: center;
 }
 
-/* Login */
+.hero h1 {
+  font-size: 5rem;
+  letter-spacing: 8px;
+  color: white;
+  margin: 0;
+}
+
+.hero p {
+  color: #aaa;
+  letter-spacing: 3px;
+}
+
+/* LOGIN */
 .login-box {
-  max-width: 350px;
-  margin: 80px auto;
+  max-width: 360px;
+  margin: 40px auto;
   background: white;
   padding: 25px;
   border-radius: 12px;
@@ -28,18 +42,28 @@ body {
 
 .login-box input {
   width: 100%;
-  margin: 8px 0;
   padding: 10px;
+  margin: 6px 0;
 }
 
-.photo-box img {
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.photo-upload img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   margin: 10px 0;
 }
 
-/* Dashboard */
+/* DASHBOARD */
 .dashboard {
   padding: 20px;
 }
@@ -49,19 +73,19 @@ body {
   justify-content: space-between;
 }
 
-.content {
+.main {
   display: flex;
   gap: 30px;
   margin-top: 20px;
 }
 
-/* ID Card */
+/* ID CARD */
 .id-card {
-  width: 250px;
-  background: linear-gradient(135deg,#667eea,#764ba2);
+  width: 260px;
+  background: linear-gradient(135deg, #111, #444);
   color: white;
-  border-radius: 15px;
   padding: 20px;
+  border-radius: 15px;
   text-align: center;
 }
 
@@ -71,20 +95,32 @@ body {
   border-radius: 50%;
 }
 
-/* Subjects */
+/* SUBJECTS */
+.subjects {
+  flex: 1;
+}
+
 .subjects input {
   width: 100%;
-  margin: 5px 0;
   padding: 8px;
+  margin: 5px 0;
+}
+
+.subjects button {
+  padding: 8px 14px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .subjects ul {
-  list-style: none;
   padding: 0;
+  list-style: none;
 }
 
 .subjects li {
   background: #ddd;
   padding: 8px;
-  margin: 5px 0;
+  margin-top: 5px;
 }
