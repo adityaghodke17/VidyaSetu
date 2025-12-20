@@ -3,43 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Portal - Login</title>
+<title>Student Portal | Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<script>
+  if (localStorage.getItem("loggedIn") === "true") {
+    window.location.href = "dashboard.html";
+  }
+</script>
 </head>
 <body>
 
-<div id="login-section">
-  <div id="login-box">
-    <h2>Student Login</h2>
-    <input type="text" id="name" placeholder="Enter Name" required>
-    <input type="text" id="enrollment" placeholder="Enrollment No." required>
-    <input type="email" id="email" placeholder="Enter Gmail only" required>
-    <input type="tel" id="phone" placeholder="10-digit Indian Phone" required>
+<div id="loader">
+  <div class="loader-card">
+    <div class="spinner"></div>
+    <h3>Loading Student Portal</h3>
+    <p>Please wait...</p>
+  </div>
+</div>
 
-    <!-- Photo upload -->
-    <div id="photo-container">
-      <img id="profile-photo-preview" src="default-avatar.png" alt="Profile Photo" title="Click to upload photo">
-      <input type="file" id="photo-upload" accept="image/*">
+<div class="login-wrapper">
+  <div class="glass-card">
+    <h2>Student Login</h2>
+
+    <input id="name" placeholder="Full Name">
+    <input id="enrollment" placeholder="Enrollment Number">
+    <input id="email" placeholder="Gmail only">
+    <input id="phone" placeholder="10-digit Indian phone">
+
+    <div class="photo-box tooltip" data-tip="Upload profile photo">
+      <img id="photo-preview" src="default-avatar.png">
+      <input type="file" id="photo-input" hidden>
+      <button onclick="triggerPhoto()">Upload Photo</button>
     </div>
 
-    <button id="login-btn">Login</button>
+    <button class="primary-btn" onclick="login()">Login</button>
   </div>
 </div>
 
 <script src="script.js"></script>
-<script>
-  document.getElementById('login-btn').addEventListener('click', login);
-
-  // Photo preview
-  document.getElementById('photo-upload').addEventListener('change', function(event){
-    const reader = new FileReader();
-    reader.onload = function() {
-      const dataURL = reader.result;
-      document.getElementById('profile-photo-preview').src = dataURL;
-      localStorage.setItem('profilePhoto', dataURL);
-    };
-    reader.readAsDataURL(event.target.files[0]);
-  });
-</script>
 </body>
 </html>
