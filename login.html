@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | VidhyaSetu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    if (localStorage.getItem("loggedIn") === "true") {
+      location.href = "dashboard.html";
+    }
+  </script>
+</head>
+<body class="login-body">
+
+<div class="login-card">
+  <h2>Student Login</h2>
+
+  <input id="name" placeholder="Full Name">
+  <input id="enroll" placeholder="Enrollment No">
+  <input id="email" placeholder="Gmail only">
+  <input id="phone" placeholder="Indian Phone">
+
+  <label>Upload Photo</label>
+  <input type="file" id="photoInput" accept="image/*">
+  <img id="photoPreview">
+
+  <button onclick="login()">Enter Dashboard</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
