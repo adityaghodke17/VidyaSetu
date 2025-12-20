@@ -1,53 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Portal | Dashboard</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <title>Student Portal | Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="loader">
-  <div class="loader-card">
-    <div class="spinner"></div>
-    <h3>Preparing Dashboard</h3>
-  </div>
-</div>
+<div id="loader">Loading...</div>
 
 <div class="dashboard">
 
-  <header class="top-bar">
+  <div class="top-bar">
     <h2 id="welcomeText">Welcome</h2>
-    <div>
-      <button id="themeToggle">🌙</button>
-      <button onclick="logout()">Logout</button>
-    </div>
-  </header>
+    <button onclick="logout()">Logout</button>
+  </div>
 
-  <div class="main-grid">
+  <div class="content">
 
-    <!-- LEFT ID CARD -->
-    <div class="id-card tooltip" data-tip="Your digital student ID">
-      <img id="card-photo">
-      <h3 id="card-name"></h3>
-      <p id="card-enroll"></p>
-      <p id="card-email"></p>
-      <p id="card-phone"></p>
+    <div class="id-card">
+      <img id="cardPhoto">
+      <h3 id="cardName"></h3>
+      <p id="cardEnroll"></p>
+      <p id="cardEmail"></p>
+      <p id="cardPhone"></p>
     </div>
 
-    <!-- RIGHT SUBJECT MANAGER -->
-    <div class="subject-box glass-card">
-      <h3>Subject Manager</h3>
+    <div class="subjects">
+      <h3>Subjects</h3>
 
-      <input id="sub-name" placeholder="Subject Name">
-      <input type="date" id="sub-start">
-      <input type="date" id="sub-due">
-      <input id="sub-teacher" placeholder="Teacher Name">
+      <input id="subName" placeholder="Subject Name">
+      <input type="date" id="subStart">
+      <input type="date" id="subDue">
+      <input id="subTeacher" placeholder="Teacher Name">
 
-      <button class="primary-btn" onclick="addSubject()">Add Subject</button>
+      <button onclick="addSubject()">Add</button>
 
       <ul id="subjectList"></ul>
     </div>
