@@ -4,38 +4,36 @@
   <meta charset="UTF-8">
   <title>VidhyaSetu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
   <script>
     if (localStorage.getItem("loggedIn") === "true") {
-      window.location.href = "dashboard.html";
+      location.href = "dashboard.html";
     }
   </script>
 </head>
 <body>
 
-<!-- HERO (MANSORY STYLE) -->
-<section class="hero">
+<div class="bg"></div>
+
+<div class="login-card">
   <h1>VIDHYASETU</h1>
-  <p>Bridging Students & Education</p>
-</section>
+  <p class="tagline">Smart Student Portal</p>
 
-<!-- LOGIN -->
-<div class="login-box">
-  <h2>Student Login</h2>
-
-  <input id="name" placeholder="Full Name" required>
-  <input id="enroll" placeholder="Enrollment Number" required>
-  <input id="email" placeholder="Email (Gmail only)" required>
-  <input id="phone" placeholder="Phone (10-digit India)" required>
+  <input id="name" placeholder="Full Name">
+  <input id="enroll" placeholder="Enrollment No">
+  <input id="email" placeholder="Gmail only">
+  <input id="phone" placeholder="Indian Phone">
 
   <div class="photo-upload">
-    <img id="photoPreview" src="https://via.placeholder.com/120">
+    <label>Upload Photo</label>
     <input type="file" id="photoInput" accept="image/*">
+    <img id="photoPreview">
   </div>
 
-  <button onclick="login()">Login</button>
+  <button onclick="login()">Enter Portal</button>
 </div>
 
 <script src="script.js"></script>
