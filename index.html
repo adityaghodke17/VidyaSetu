@@ -4,38 +4,20 @@
   <meta charset="UTF-8">
   <title>VidhyaSetu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
-  <script>
-    if (localStorage.getItem("loggedIn") === "true") {
-      location.href = "dashboard.html";
-    }
-  </script>
 </head>
-<body>
+<body class="intro-body">
 
-<div class="bg"></div>
-
-<div class="login-card">
-  <h1>VIDHYASETU</h1>
-  <p class="tagline">Smart Student Portal</p>
-
-  <input id="name" placeholder="Full Name">
-  <input id="enroll" placeholder="Enrollment No">
-  <input id="email" placeholder="Gmail only">
-  <input id="phone" placeholder="Indian Phone">
-
-  <div class="photo-upload">
-    <label>Upload Photo</label>
-    <input type="file" id="photoInput" accept="image/*">
-    <img id="photoPreview">
-  </div>
-
-  <button onclick="login()">Enter Portal</button>
+<div class="intro">
+  <h1 class="brand">VIDHYASETU</h1>
+  <p class="brand-sub">Bridging Students & Education</p>
 </div>
 
-<script src="script.js"></script>
+<script>
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 3000);
+</script>
+
 </body>
 </html>
