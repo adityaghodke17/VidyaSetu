@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Portal | Dashboard</title>
+  <meta charset="UTF-8">
+  <title>VidhyaSetu Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="loader">Loading...</div>
-
 <div class="dashboard">
 
   <div class="top-bar">
-    <h2 id="welcomeText">Welcome</h2>
+    <h2 id="welcome"></h2>
     <button onclick="logout()">Logout</button>
   </div>
 
-  <div class="content">
+  <div class="main">
 
+    <!-- ID CARD -->
     <div class="id-card">
       <img id="cardPhoto">
       <h3 id="cardName"></h3>
@@ -27,21 +27,21 @@
       <p id="cardPhone"></p>
     </div>
 
+    <!-- SUBJECTS -->
     <div class="subjects">
-      <h3>Subjects</h3>
+      <h3>Add Subject</h3>
 
       <input id="subName" placeholder="Subject Name">
       <input type="date" id="subStart">
       <input type="date" id="subDue">
       <input id="subTeacher" placeholder="Teacher Name">
 
-      <button onclick="addSubject()">Add</button>
+      <button onclick="addSubject()">Add Subject</button>
 
       <ul id="subjectList"></ul>
     </div>
 
   </div>
-
 </div>
 
 <script src="script.js"></script>
