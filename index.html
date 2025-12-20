@@ -15,6 +15,13 @@
     <input type="text" id="enrollment" placeholder="Enrollment No." required>
     <input type="email" id="email" placeholder="Enter Gmail only" required>
     <input type="tel" id="phone" placeholder="10-digit Indian Phone" required>
+
+    <!-- Photo upload -->
+    <div id="photo-container">
+      <img id="profile-photo-preview" src="default-avatar.png" alt="Profile Photo" title="Click to upload photo">
+      <input type="file" id="photo-upload" accept="image/*">
+    </div>
+
     <button id="login-btn">Login</button>
   </div>
 </div>
@@ -22,7 +29,17 @@
 <script src="script.js"></script>
 <script>
   document.getElementById('login-btn').addEventListener('click', login);
+
+  // Photo preview
+  document.getElementById('photo-upload').addEventListener('change', function(event){
+    const reader = new FileReader();
+    reader.onload = function() {
+      const dataURL = reader.result;
+      document.getElementById('profile-photo-preview').src = dataURL;
+      localStorage.setItem('profilePhoto', dataURL);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  });
 </script>
 </body>
 </html>
- 
