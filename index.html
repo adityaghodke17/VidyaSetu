@@ -1,61 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>VidyaSetu</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Student Portal</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- LOGIN -->
-<div class="login-container" id="loginBox">
-    <h2>VidyaSetu</h2>
-    <p>Student Login</p>
-    <input type="text" id="studentName" placeholder="Enter your name">
-    <input type="text" id="studentEnroll" placeholder="Enrollment Number">
-    <input type="email" id="studentEmail" placeholder="Email">
-    <input type="text" id="studentPhone" placeholder="Phone Number">
-    <button onclick="login()">Sign In</button>
+<!-- LOGIN SECTION -->
+<div id="login-section">
+  <div id="login-box">
+    <h2>Student Login</h2>
+    <input type="text" id="name" placeholder="Enter Name" required>
+    <input type="text" id="enrollment" placeholder="Enrollment No." required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="tel" id="phone" placeholder="Phone" required>
+    <button onclick="login()">Login</button>
+  </div>
 </div>
 
-<!-- APP -->
-<div class="container hidden" id="appBox">
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="dashboard-header">
+    <h2 id="student-name">Welcome, Student</h2>
+    <button id="logout-btn" onclick="logout()">Logout</button>
+  </div>
 
-    <h1>VidyaSetu</h1>
-    <p class="tagline">Because assignments don’t remember themselves 😄</p>
-
-    <!-- PROFILE -->
-    <div class="profile">
-        <span id="profileName"></span>
-        <button class="logout" onclick="logout()">Logout</button>
+  <!-- ID CARD -->
+  <div id="id-card">
+    <div id="profile-photo-container">
+      <img id="profile-photo" src="default-avatar.png" alt="Profile Photo">
+      <input type="file" id="photo-upload" accept="image/*" onchange="uploadPhoto(event)">
     </div>
+    <h3 id="card-name"></h3>
+    <p>Enrollment: <span id="card-enrollment"></span></p>
+    <p>Email: <span id="card-email"></span></p>
+    <p>Phone: <span id="card-phone"></span></p>
+  </div>
 
-    <!-- ID CARD -->
-    <div class="id-card">
-        <div class="id-header">VIDYASETU</div>
-        <div class="id-body">
-            <p><strong>Name:</strong> <span id="idName"></span></p>
-            <p><strong>Enrollment:</strong> <span id="idEnroll"></span></p>
-            <p><strong>Email:</strong> <span id="idEmail"></span></p>
-            <p><strong>Phone:</strong> <span id="idPhone"></span></p>
-        </div>
-        <div class="id-footer">Premium Student ID</div>
-    </div>
+  <!-- SUBJECT SELECTION -->
+  <div id="subject-section">
+    <h3>Select Subjects</h3>
+    <select id="subject-select">
+      <option value="Mathematics">Mathematics</option>
+      <option value="Physics">Physics</option>
+      <option value="Chemistry">Chemistry</option>
+      <option value="Biology">Biology</option>
+      <option value="Computer Science">Computer Science</option>
+      <option value="English">English</option>
+    </select>
+    <button onclick="addSubject()">Add Subject</button>
 
-    <!-- STATS -->
-    <div class="stats">
-        <div>Total Tasks: <span id="totalTasks">0</span></div>
-        <div>Completed: <span id="doneTasks">0</span></div>
-    </div>
-
-    <!-- TASK INPUT -->
-    <div class="task-box">
-        <input type="text" id="taskInput" placeholder="Enter your task">
-        <input type="date" id="dateInput">
-        <button onclick="addTask()">Add Task</button>
-    </div>
-
-    <ul id="taskList"></ul>
+    <ul id="subjects-list"></ul>
+  </div>
 </div>
 
 <script src="script.js"></script>
