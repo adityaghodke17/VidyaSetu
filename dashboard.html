@@ -4,42 +4,43 @@
   <meta charset="UTF-8">
   <title>Dashboard | VidhyaSetu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dash-body">
 
-<header class="top-bar">
+<header class="dash-top">
   <h2 id="welcome"></h2>
   <button onclick="logout()">Logout</button>
 </header>
 
-<main class="layout">
+<div class="dash-main">
 
-  <!-- ID CARD -->
-  <section class="id-card">
-    <img id="cardPhoto">
-    <h3 id="cardName"></h3>
-    <p id="cardEnroll"></p>
-    <p id="cardEmail"></p>
-    <p id="cardPhone"></p>
-  </section>
+  <!-- Flipping ID Card -->
+  <div class="id-card-container">
+    <div class="id-card-flip">
+      <div class="id-card front">
+        <img id="cardPhoto">
+        <h3 id="cardName"></h3>
+        <p id="cardEnroll"></p>
+      </div>
+      <div class="id-card back">
+        <p id="cardEmail"></p>
+        <p id="cardPhone"></p>
+        <p>VidhyaSetu Premium Student</p>
+      </div>
+    </div>
+  </div>
 
-  <!-- SUBJECTS -->
-  <section class="subjects">
+  <!-- Subjects Section -->
+  <div class="subjects">
     <h3>Subjects</h3>
-
     <input id="subName" placeholder="Subject Name">
     <input id="subTeacher" placeholder="Teacher Name">
-    <input type="date" id="subStart">
-    <input type="date" id="subDue">
-
     <button onclick="addSubject()">Add</button>
     <ul id="subjectList"></ul>
-  </section>
+  </div>
 
-</main>
+</div>
 
 <script src="script.js"></script>
 </body>
