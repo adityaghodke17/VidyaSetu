@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Portal | Login</title>
+  <meta charset="UTF-8">
+  <title>VidhyaSetu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
   <script>
@@ -14,20 +15,24 @@
 </head>
 <body>
 
-<div id="loader">Loading...</div>
+<!-- HERO (MANSORY STYLE) -->
+<section class="hero">
+  <h1>VIDHYASETU</h1>
+  <p>Bridging Students & Education</p>
+</section>
 
+<!-- LOGIN -->
 <div class="login-box">
   <h2>Student Login</h2>
 
-  <input id="name" placeholder="Full Name">
-  <input id="enroll" placeholder="Enrollment No">
-  <input id="email" placeholder="Gmail only">
-  <input id="phone" placeholder="10-digit Indian phone">
+  <input id="name" placeholder="Full Name" required>
+  <input id="enroll" placeholder="Enrollment Number" required>
+  <input id="email" placeholder="Email (Gmail only)" required>
+  <input id="phone" placeholder="Phone (10-digit India)" required>
 
-  <div class="photo-box">
+  <div class="photo-upload">
     <img id="photoPreview" src="https://via.placeholder.com/120">
-    <input type="file" id="photoInput" hidden>
-    <button onclick="uploadPhoto()">Upload Photo</button>
+    <input type="file" id="photoInput" accept="image/*">
   </div>
 
   <button onclick="login()">Login</button>
