@@ -2,24 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>VidyaSetu – Student Task Manager</title>
+    <title>VidyaSetu</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>VidyaSetu</h1>
-        <p class="tagline">Because assignments don’t remember themselves 😄</p>
+<!-- LOGIN -->
+<div class="login-container" id="loginBox">
+    <h2>VidyaSetu</h2>
+    <p>Student Login</p>
+    <input type="text" id="studentName" placeholder="Enter your name">
+    <input type="text" id="studentEnroll" placeholder="Enrollment Number">
+    <input type="email" id="studentEmail" placeholder="Email">
+    <input type="text" id="studentPhone" placeholder="Phone Number">
+    <button onclick="login()">Sign In</button>
+</div>
 
-        <div class="task-box">
-            <input type="text" id="taskInput" placeholder="Enter your task">
-            <input type="date" id="dateInput">
-            <button onclick="addTask()">Add Task</button>
-        </div>
+<!-- APP -->
+<div class="container hidden" id="appBox">
 
-        <ul id="taskList"></ul>
+    <h1>VidyaSetu</h1>
+    <p class="tagline">Because assignments don’t remember themselves 😄</p>
+
+    <!-- PROFILE -->
+    <div class="profile">
+        <span id="profileName"></span>
+        <button class="logout" onclick="logout()">Logout</button>
     </div>
 
-    <script src="script.js"></script>
+    <!-- ID CARD -->
+    <div class="id-card">
+        <div class="id-header">VIDYASETU</div>
+        <div class="id-body">
+            <p><strong>Name:</strong> <span id="idName"></span></p>
+            <p><strong>Enrollment:</strong> <span id="idEnroll"></span></p>
+            <p><strong>Email:</strong> <span id="idEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="idPhone"></span></p>
+        </div>
+        <div class="id-footer">Premium Student ID</div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+        <div>Total Tasks: <span id="totalTasks">0</span></div>
+        <div>Completed: <span id="doneTasks">0</span></div>
+    </div>
+
+    <!-- TASK INPUT -->
+    <div class="task-box">
+        <input type="text" id="taskInput" placeholder="Enter your task">
+        <input type="date" id="dateInput">
+        <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
