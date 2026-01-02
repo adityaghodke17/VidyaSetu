@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard | VidhyaSetu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>VidyaSetu | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="dash-body">
+<body>
 
-<header class="dash-top">
-  <h2 id="welcome"></h2>
-  <button onclick="logout()">Logout</button>
-</header>
+<div class="container" id="appBox">
 
-<div class="dash-main">
+    <h1>VidyaSetu</h1>
+    <p class="tagline">Your student dashboard 📚</p>
 
-  <!-- Flipping ID Card -->
-  <div class="id-card-container">
-    <div class="id-card-flip">
-      <div class="id-card front">
-        <img id="cardPhoto">
-        <h3 id="cardName"></h3>
-        <p id="cardEnroll"></p>
-      </div>
-      <div class="id-card back">
-        <p id="cardEmail"></p>
-        <p id="cardPhone"></p>
-        <p>VidhyaSetu Premium Student</p>
-      </div>
+    <div class="profile">
+        <span id="profileName"></span>
+        <button class="logout" onclick="logout()">Logout</button>
     </div>
-  </div>
 
-  <!-- Subjects Section -->
-  <div class="subjects">
-    <h3>Subjects</h3>
-    <input id="subName" placeholder="Subject Name">
-    <input id="subTeacher" placeholder="Teacher Name">
-    <button onclick="addSubject()">Add</button>
-    <ul id="subjectList"></ul>
-  </div>
+    <div class="id-card">
+        <div class="id-header">VIDYASETU</div>
+        <div class="id-body">
+            <p><strong>Name:</strong> <span id="idName"></span></p>
+            <p><strong>Email:</strong> <span id="idEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="idPhone"></span></p>
+        </div>
+        <div class="id-footer">Premium Student ID</div>
+    </div>
+
+    <div class="stats">
+        <div>Total Tasks: <span id="totalTasks">0</span></div>
+        <div>Completed: <span id="doneTasks">0</span></div>
+    </div>
+
+    <div class="task-box">
+        <input type="text" id="taskInput" placeholder="Enter your task">
+        <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <ul id="taskList"></ul>
 
 </div>
 
