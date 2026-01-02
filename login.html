@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div class="login-container" id="loginBox">
+<div class="login-container">
     <h2>VidyaSetu</h2>
     <p class="login-sub">Smart Student Login</p>
 
@@ -24,13 +24,7 @@
         <input type="text" id="studentPhone" placeholder="Phone number">
     </div>
 
-    <button onclick="sendOTP()">Send OTP</button>
-
-    <div class="otp-box hidden" id="otpBox">
-        <input type="text" id="otpInput" placeholder="Enter OTP">
-        <button onclick="verifyOTP()">Verify & Login</button>
-        <p class="otp-msg">OTP sent to your email</p>
-    </div>
+    <button onclick="login()">Login</button>
 </div>
 
 <script src="script.js"></script>
