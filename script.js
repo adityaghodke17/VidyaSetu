@@ -1,8 +1,7 @@
 let tasks = [];
-let generatedOTP = "";
 
 /* LOGIN */
-function sendOTP() {
+function login() {
     const name = studentName.value.trim();
     const email = studentEmail.value.trim();
     const phone = studentPhone.value.trim();
@@ -14,7 +13,7 @@ function sendOTP() {
     }
 
     if (!email.includes("@") || !email.includes(".")) {
-        alert("Enter valid email");
+        alert("Enter a valid email");
         return;
     }
 
@@ -23,21 +22,9 @@ function sendOTP() {
         return;
     }
 
-    generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    console.log("OTP (simulation):", generatedOTP);
-
-    otpBox.classList.remove("hidden");
-}
-
-function verifyOTP() {
-    if (otpInput.value !== generatedOTP) {
-        alert("Invalid OTP");
-        return;
-    }
-
-    localStorage.setItem("student", studentName.value);
-    localStorage.setItem("email", studentEmail.value);
-    localStorage.setItem("phone", countryCode.value + " " + studentPhone.value);
+    localStorage.setItem("student", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("phone", code + " " + phone);
 
     window.location.href = "dashboard.html";
 }
