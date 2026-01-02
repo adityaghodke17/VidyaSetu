@@ -1,160 +1,134 @@
 * {
-    box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
+  box-sizing: border-box;
+  font-family: Segoe UI, sans-serif;
 }
 
 body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #2563eb, #1e40af);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg,#1e40af,#2563eb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* LOGIN */
+.login-wrapper {
+  display: flex;
+  gap: 30px;
+}
+
 .login-container {
-    background: white;
-    padding: 25px;
-    width: 320px;
-    border-radius: 16px;
-    text-align: center;
-    animation: pop 0.6s ease;
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  width: 260px;
+  text-align: center;
 }
 
-.login-sub {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 10px;
+.login-container input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
 }
 
-.login-container input,
-.phone-box select {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.phone-box {
-    display: flex;
-    gap: 6px;
+.login-sub { color: #555; }
+
+/* CARTOONS */
+.cartoon-box {
+  display: flex;
+  gap: 12px;
 }
 
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+.face {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.yellow { background:#fde047; }
+.purple { background:#7c3aed; }
+.orange { background:#fb923c; }
+.black { background:#111827; }
+
+.eye {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 24px;
+}
+
+.eye.left { left: 18px; }
+.eye.right { right: 18px; }
+
+.shake { animation: shake 0.4s; }
+.success { animation: bounce 0.5s; }
+.suspicious { animation: tilt 0.6s infinite alternate; }
+
+@keyframes shake {
+  0%{transform:rotate(0)}
+  25%{transform:rotate(10deg)}
+  50%{transform:rotate(-10deg)}
+  75%{transform:rotate(10deg)}
+  100%{transform:rotate(0)}
+}
+@keyframes bounce {
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+  100%{transform:translateY(0)}
+}
+@keyframes tilt {
+  from{transform:rotate(-6deg)}
+  to{transform:rotate(6deg)}
 }
 
 /* DASHBOARD */
 .container {
-    background: white;
-    width: 380px;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    animation: pop 0.6s ease;
+  background: white;
+  padding: 20px;
+  width: 300px;
+  border-radius: 16px;
 }
 
-h1 {
-    text-align: center;
-    color: #1e40af;
-}
-
-.tagline {
-    text-align: center;
-    font-size: 14px;
-    color: #555;
-}
-
-.profile {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-}
+.tagline { color:#555; }
 
 .logout {
-    background: #dc2626;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 6px;
+  background:#dc2626;
+  margin-bottom:10px;
 }
 
-/* ID CARD */
 .id-card {
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #facc15, #ca8a04);
-    box-shadow: 0 0 20px #fde047;
-    animation: glow 2s infinite alternate;
-}
-
-.id-header,
-.id-footer {
-    text-align: center;
-    font-weight: bold;
-}
-
-.id-body p {
-    font-size: 13px;
-    margin: 5px 0;
-}
-
-/* TASKS */
-.task-box input,
-.task-box button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    border-radius: 8px;
-}
-
-.task-box button {
-    background: #2563eb;
-    color: white;
-    border: none;
+  background: linear-gradient(135deg,#facc15,#ca8a04);
+  padding:10px;
+  border-radius:12px;
+  margin:10px 0;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
+  list-style:none;
+  padding:0;
 }
 
 li {
-    background: #eef2ff;
-    padding: 8px;
-    border-radius: 8px;
-    margin-bottom: 6px;
-    cursor: pointer;
+  background:#eef2ff;
+  margin:5px 0;
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
 }
 
 li.done {
-    text-decoration: line-through;
-    background: #bbf7d0;
-}
-
-.stats {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-}
-
-/* ANIMATIONS */
-@keyframes pop {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes glow {
-    from { box-shadow: 0 0 10px #facc15; }
-    to { box-shadow: 0 0 25px #fde047; }
+  background:#bbf7d0;
+  text-decoration:line-through;
 }
