@@ -1,56 +1,107 @@
-// Photo preview
-const photoInput = document.getElementById("photoInput");
-if (photoInput) {
-  photoInput.addEventListener("change", e => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      photoPreview.src = reader.result;
-      photoPreview.style.display = "block";
-      localStorage.setItem("photo", reader.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  });
+let tasks = [];
+let generatedOTP = "";
+
+/* LOGIN PAGE */
+function sendOTP() {
+    const name = studentName.value.trim();
+    const email = studentEmail.value.trim();
+    const phone = studentPhone.value.trim();
+    const code = countryCode.value;
+
+    if (!name || !email || !phone) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+        alert("Enter valid email");
+        return;
+    }
+
+    if (code === "+91" && phone.length !== 10) {
+        alert("Indian number must be 10 digits");
+        return;
+    }
+
+    generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+    console.log("OTP (simulation):", generatedOTP);
+
+    otpBox.classList.remove("hidden");
 }
 
-// Login
-function login() {
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
+function verifyOTP() {
+    if (otpInput.value !== generatedOTP) {
+        alert("Invalid OTP");
+        return;
+    }
 
-  if (!email.endsWith("@gmail.com")) return alert("Gmail only");
-  if (!/^[6-9]\d{9}$/.test(phone)) return alert("Invalid phone");
+    localStorage.setItem("student", studentName.value);
+    localStorage.setItem("email", studentEmail.value);
+    localStorage.setItem("phone", countryCode.value + " " + studentPhone.value);
 
-  ["name","enroll","email","phone"].forEach(id =>
-    localStorage.setItem(id, document.getElementById(id).value)
-  );
-
-  if (!localStorage.getItem("photo")) return alert("Upload photo");
-
-  localStorage.setItem("loggedIn","true");
-  location.href = "dashboard.html";
+    window.location.href = "dashboard.html";
 }
 
-// Dashboard
-if (location.pathname.includes("dashboard")) {
-  if (!localStorage.getItem("loggedIn")) location.href = "login.html";
+/* DASHBOARD */
+function loadProfile() {
+    if (!localStorage.getItem("student")) {
+        window.location.href = "login.html";
+        return;
+    }
 
-  welcome.innerText = "Welcome, " + localStorage.getItem("name");
-  cardName.innerText = localStorage.getItem("name");
-  cardEnroll.innerText = localStorage.getItem("enroll");
-  cardEmail.innerText = localStorage.getItem("email");
-  cardPhone.innerText = localStorage.getItem("phone");
-  cardPhoto.src = localStorage.getItem("photo");
+    profileName.innerText = "Welcome, " + localStorage.getItem("student");
+    idName.innerText = localStorage.getItem("student");
+    idEmail.innerText = localStorage.getItem("email");
+    idPhone.innerText = localStorage.getItem("phone");
+
+    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    renderTasks();
 }
 
-// Subjects
-function addSubject() {
-  const li = document.createElement("li");
-  li.textContent = document.getElementById("subName").value;
-  subjectList.appendChild(li);
-}
-
-// Logout
 function logout() {
-  localStorage.clear();
-  location.href = "login.html";
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
+/* TASKS */
+function addTask() {
+    if (taskInput.value === "") return;
+
+    tasks.push({ text: taskInput.value, done: false });
+    taskInput.value = "";
+    saveTasks();
+}
+
+function renderTasks() {
+    taskList.innerHTML = "";
+    let done = 0;
+
+    tasks.forEach((task, i) => {
+        const li = document.createElement("li");
+        li.innerText = task.text;
+
+        if (task.done) {
+            li.classList.add("done");
+            done++;
+        }
+
+        li.onclick = () => {
+            task.done = !task.done;
+            saveTasks();
+        };
+
+        taskList.appendChild(li);
+    });
+
+    totalTasks.innerText = tasks.length;
+    doneTasks.innerText = done;
+}
+
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    renderTasks();
+}
+
+if (document.getElementById("appBox")) {
+    loadProfile();
 }
