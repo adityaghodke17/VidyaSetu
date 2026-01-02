@@ -1,23 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>VidhyaSetu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="intro-body">
+<!-- LOGIN SCREEN -->
+<div class="login-container" id="loginBox">
+    <h2>VidyaSetu</h2>
+    <p class="login-sub">Smart Student Login</p>
 
-<div class="intro">
-  <h1 class="brand">VIDHYASETU</h1>
-  <p class="brand-sub">Bridging Students & Education</p>
+    <input type="text" id="studentName" placeholder="Full Name">
+
+    <input type="text" id="studentEmail" placeholder="Email (example@gmail.com)">
+
+    <div class="phone-box">
+        <select id="countryCode">
+            <option value="+91">🇮🇳 +91</option>
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+44">🇬🇧 +44</option>
+        </select>
+        <input type="text" id="studentPhone" placeholder="Phone number">
+    </div>
+
+    <button onclick="sendOTP()">Send OTP</button>
+
+    <!-- OTP BOX -->
+    <div class="otp-box hidden" id="otpBox">
+        <input type="text" id="otpInput" placeholder="Enter OTP">
+        <button onclick="verifyOTP()">Verify & Login</button>
+        <p class="otp-msg">OTP sent to your email 📩</p>
+    </div>
 </div>
-
-<script>
-  setTimeout(() => {
-    window.location.href = "login.html";
-  }, 3000);
-</script>
-
-</body>
-</html>
