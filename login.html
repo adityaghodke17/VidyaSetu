@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login | VidhyaSetu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-
-  <script>
-    if (localStorage.getItem("loggedIn") === "true") {
-      location.href = "dashboard.html";
-    }
-  </script>
+    <meta charset="UTF-8">
+    <title>VidyaSetu | Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="login-body">
+<body>
 
-<div class="login-card">
-  <h2>Student Login</h2>
+<div class="login-container" id="loginBox">
+    <h2>VidyaSetu</h2>
+    <p class="login-sub">Smart Student Login</p>
 
-  <input id="name" placeholder="Full Name">
-  <input id="enroll" placeholder="Enrollment No">
-  <input id="email" placeholder="Gmail only">
-  <input id="phone" placeholder="Indian Phone">
+    <input type="text" id="studentName" placeholder="Full Name">
 
-  <label>Upload Photo</label>
-  <input type="file" id="photoInput" accept="image/*">
-  <img id="photoPreview">
+    <input type="text" id="studentEmail" placeholder="Email (example@gmail.com)">
 
-  <button onclick="login()">Enter Dashboard</button>
+    <div class="phone-box">
+        <select id="countryCode">
+            <option value="+91">🇮🇳 +91</option>
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+44">🇬🇧 +44</option>
+        </select>
+        <input type="text" id="studentPhone" placeholder="Phone number">
+    </div>
+
+    <button onclick="sendOTP()">Send OTP</button>
+
+    <div class="otp-box hidden" id="otpBox">
+        <input type="text" id="otpInput" placeholder="Enter OTP">
+        <button onclick="verifyOTP()">Verify & Login</button>
+        <p class="otp-msg">OTP sent to your email 📩</p>
+    </div>
 </div>
 
 <script src="script.js"></script>
