@@ -1,47 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>VidyaSetu | Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>VidyaSetu | Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container" id="appBox">
+<div class="container">
 
-    <h1>VidyaSetu</h1>
-    <p class="tagline">Because assignments don’t remember themselves</p>
+  <h1>VidyaSetu</h1>
+  <p class="tagline" id="welcome"></p>
 
-    <div class="profile">
-        <span id="profileName"></span>
-        <button class="logout" onclick="logout()">Logout</button>
-    </div>
+  <button class="logout" onclick="logout()">Logout</button>
 
-    <div class="id-card">
-        <div class="id-header">VIDYASETU</div>
-        <div class="id-body">
-            <p><strong>Name:</strong> <span id="idName"></span></p>
-            <p><strong>Email:</strong> <span id="idEmail"></span></p>
-            <p><strong>Phone:</strong> <span id="idPhone"></span></p>
-        </div>
-        <div class="id-footer">Premium Student ID</div>
-    </div>
+  <div class="id-card">
+    <h3>Student ID</h3>
+    <p><b>Name:</b> <span id="name"></span></p>
+  </div>
 
-    <div class="stats">
-        <div>Total Tasks: <span id="totalTasks">0</span></div>
-        <div>Completed: <span id="doneTasks">0</span></div>
-    </div>
+  <div class="task-box">
+    <input id="taskInput" placeholder="Add task">
+    <button onclick="addTask()">Add</button>
+  </div>
 
-    <div class="task-box">
-        <input type="text" id="taskInput" placeholder="Enter your task">
-        <button onclick="addTask()">Add Task</button>
-    </div>
-
-    <ul id="taskList"></ul>
+  <ul id="taskList"></ul>
 
 </div>
 
 <script src="script.js"></script>
 </body>
 </html>
- 
