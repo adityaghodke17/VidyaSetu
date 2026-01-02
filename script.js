@@ -1,7 +1,7 @@
 let tasks = [];
 let generatedOTP = "";
 
-/* LOGIN PAGE */
+/* LOGIN */
 function sendOTP() {
     const name = studentName.value.trim();
     const email = studentEmail.value.trim();
@@ -76,7 +76,7 @@ function renderTasks() {
     taskList.innerHTML = "";
     let done = 0;
 
-    tasks.forEach((task, i) => {
+    tasks.forEach(task => {
         const li = document.createElement("li");
         li.innerText = task.text;
 
