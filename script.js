@@ -1,94 +1,83 @@
-let tasks = [];
+const faces = document.querySelectorAll(".face");
+
+/* EYES FOLLOW CURSOR */
+document.addEventListener("mousemove", e => {
+  document.querySelectorAll(".eye").forEach(eye => {
+    const r = eye.getBoundingClientRect();
+    eye.style.transform =
+      `translate(${(e.clientX-r.left-4)/25}px,${(e.clientY-r.top-4)/25}px)`;
+  });
+});
+
+/* PASSWORD REACTION */
+document.getElementById("password")?.addEventListener("input", e => {
+  faces.forEach(f=>f.classList.remove("suspicious"));
+  if(e.target.value.length>0 && e.target.value.length<6)
+    faces.forEach(f=>f.classList.add("suspicious"));
+});
 
 /* LOGIN */
-function login() {
-    const name = studentName.value.trim();
-    const email = studentEmail.value.trim();
-    const phone = studentPhone.value.trim();
-    const code = countryCode.value;
+function login(){
+  const u=studentName.value.trim();
+  const p=password.value.trim();
+  const msg=document.getElementById("msg");
 
-    if (!name || !email || !phone) {
-        alert("Please fill all fields");
-        return;
-    }
+  faces.forEach(f=>f.classList.remove("shake","success"));
 
-    if (!email.includes("@") || !email.includes(".")) {
-        alert("Enter a valid email");
-        return;
-    }
+  if(!u || p.length<6){
+    faces.forEach(f=>{
+      f.classList.add("shake");
+      setTimeout(()=>f.classList.remove("shake"),400);
+    });
+    msg.innerText="Nahh 😒 try again";
+    msg.style.color="red";
+    return;
+  }
 
-    if (code === "+91" && phone.length !== 10) {
-        alert("Indian number must be 10 digits");
-        return;
-    }
+  faces.forEach(f=>f.classList.add("success"));
+  msg.innerText="Welcome 😎";
+  msg.style.color="green";
 
-    localStorage.setItem("student", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("phone", code + " " + phone);
-
-    window.location.href = "dashboard.html";
+  localStorage.setItem("user",u);
+  setTimeout(()=>location.href="dashboard.html",900);
 }
 
 /* DASHBOARD */
-function loadProfile() {
-    if (!localStorage.getItem("student")) {
-        window.location.href = "login.html";
-        return;
-    }
-
-    profileName.innerText = "Welcome, " + localStorage.getItem("student");
-    idName.innerText = localStorage.getItem("student");
-    idEmail.innerText = localStorage.getItem("email");
-    idPhone.innerText = localStorage.getItem("phone");
-
-    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    renderTasks();
-}
-
-function logout() {
-    localStorage.clear();
-    window.location.href = "login.html";
+if(document.getElementById("welcome")){
+  const u=localStorage.getItem("user");
+  if(!u) location.href="login.html";
+  welcome.innerText=`Welcome back, ${u} 👋`;
+  name.innerText=u;
 }
 
 /* TASKS */
-function addTask() {
-    if (taskInput.value === "") return;
+let tasks=JSON.parse(localStorage.getItem("tasks")||"[]");
 
-    tasks.push({ text: taskInput.value, done: false });
-    taskInput.value = "";
-    saveTasks();
+function addTask(){
+  if(!taskInput.value) return;
+  tasks.push({t:taskInput.value,d:false});
+  taskInput.value="";
+  save();
 }
 
-function renderTasks() {
-    taskList.innerHTML = "";
-    let done = 0;
-
-    tasks.forEach(task => {
-        const li = document.createElement("li");
-        li.innerText = task.text;
-
-        if (task.done) {
-            li.classList.add("done");
-            done++;
-        }
-
-        li.onclick = () => {
-            task.done = !task.done;
-            saveTasks();
-        };
-
-        taskList.appendChild(li);
-    });
-
-    totalTasks.innerText = tasks.length;
-    doneTasks.innerText = done;
+function save(){
+  localStorage.setItem("tasks",JSON.stringify(tasks));
+  render();
 }
 
-function saveTasks() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    renderTasks();
+function render(){
+  taskList.innerHTML="";
+  tasks.forEach(t=>{
+    const li=document.createElement("li");
+    li.innerText=t.t;
+    if(t.d) li.classList.add("done");
+    li.onclick=()=>{t.d=!t.d;save()};
+    taskList.appendChild(li);
+  });
 }
+render();
 
-if (document.getElementById("appBox")) {
-    loadProfile();
+function logout(){
+  localStorage.clear();
+  location.href="login.html";
 }
