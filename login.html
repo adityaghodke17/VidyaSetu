@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>VidyaSetu | Login</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>VidyaSetu | Login</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="login-container">
+<div class="login-wrapper">
+
+  <!-- CARTOON CREW -->
+  <div class="cartoon-box">
+    <div class="face yellow"><div class="eye left"></div><div class="eye right"></div></div>
+    <div class="face purple"><div class="eye left"></div><div class="eye right"></div></div>
+    <div class="face orange"><div class="eye left"></div><div class="eye right"></div></div>
+    <div class="face black"><div class="eye left"></div><div class="eye right"></div></div>
+  </div>
+
+  <!-- LOGIN -->
+  <div class="login-container">
     <h2>VidyaSetu</h2>
-    <p class="login-sub">Smart Student Login</p>
+    <p class="login-sub">Login but make it fun 👀</p>
 
-    <input type="text" id="studentName" placeholder="Full Name">
+    <input id="studentName" placeholder="Username">
+    <input id="password" type="password" placeholder="Password (min 6 chars)">
 
-    <input type="text" id="studentEmail" placeholder="Email (example@gmail.com)">
+    <button onclick="login()">Enter</button>
+    <p id="msg"></p>
+  </div>
 
-    <div class="phone-box">
-        <select id="countryCode">
-            <option value="+91">🇮🇳 +91</option>
-            <option value="+1">🇺🇸 +1</option>
-            <option value="+44">🇬🇧 +44</option>
-        </select>
-        <input type="text" id="studentPhone" placeholder="Phone number">
-    </div>
-
-    <button onclick="login()">Login</button>
 </div>
 
 <script src="script.js"></script>
